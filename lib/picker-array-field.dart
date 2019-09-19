@@ -7,15 +7,15 @@ class PickerArrayField extends FormField<String> {
     @required this.options,
 
     Key key,
+    this.resetIcon = const Icon(Icons.close),
+    this.onChanged,
+    this.controller,
+    this.focusNode,
     FormFieldSetter<String> onSaved,
     FormFieldValidator<String> validator,
     String initialValue,
     bool autovalidate = false,
     bool enabled = true,
-    this.resetIcon = const Icon(Icons.close),
-    this.onChanged,
-    this.controller,
-    this.focusNode,
     InputDecoration decoration = const InputDecoration(),
     TextInputType keyboardType,
     TextCapitalization textCapitalization = TextCapitalization.none,
@@ -43,57 +43,57 @@ class PickerArrayField extends FormField<String> {
     bool enableInteractiveSelection = true,
     InputCounterWidgetBuilder buildCounter,
   }) : super(
-    key: key,
-    autovalidate: autovalidate,
-    initialValue: initialValue,
-    enabled: enabled ?? true,
-    validator: validator,
-    onSaved: onSaved,
-    builder: (field) {
-      final _PickerArrayFieldState state = field;
-      final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration()).applyDefaults(Theme.of(field.context).inputDecorationTheme);
-      return TextField(
-        controller: state._effectiveController,
-        focusNode: state._effectiveFocusNode,
-        decoration: effectiveDecoration.copyWith(
-          errorText: field.errorText,
-          suffixIcon: state.shouldShowClearIcon(effectiveDecoration) ? 
-              IconButton(
-                  icon: resetIcon,
-                  onPressed: state.clear,
-                )
-              : effectiveDecoration.suffixIcon,
-        ),
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        style: style,
-        strutStyle: strutStyle,
-        textAlign: textAlign,
-        textDirection: textDirection,
-        textCapitalization: textCapitalization,
-        autofocus: autofocus,
-        obscureText: obscureText,
-        autocorrect: autocorrect,
-        maxLengthEnforced: maxLengthEnforced,
-        maxLines: maxLines,
-        minLines: minLines,
-        expands: expands,
-        maxLength: maxLength,
-        onChanged: (string) => field.didChange(tryParse(string, options)),
-        onEditingComplete: onEditingComplete,
-        onSubmitted: (string) => onFieldSubmitted == null ? null : onFieldSubmitted(tryParse(string, options)),
-        inputFormatters: inputFormatters,
-        enabled: enabled,
-        cursorWidth: cursorWidth,
-        cursorRadius: cursorRadius,
-        cursorColor: cursorColor,
-        scrollPadding: scrollPadding,
-        keyboardAppearance: keyboardAppearance,
-        enableInteractiveSelection: enableInteractiveSelection,
-        buildCounter: buildCounter,
-      );
-    }
-  );
+            key: key,
+            autovalidate: autovalidate,
+            initialValue: initialValue,
+            enabled: enabled ?? true,
+            validator: validator,
+            onSaved: onSaved,
+            builder: (field) {
+              final _PickerArrayFieldState state = field;
+              final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration()).applyDefaults(Theme.of(field.context).inputDecorationTheme);
+              return TextField(
+                controller: state._effectiveController,
+                focusNode: state._effectiveFocusNode,
+                decoration: effectiveDecoration.copyWith(
+                  errorText: field.errorText,
+                  suffixIcon: state.shouldShowClearIcon(effectiveDecoration)
+                      ? IconButton(
+                          icon: resetIcon,
+                          onPressed: state.clear,
+                        )
+                      : effectiveDecoration.suffixIcon,
+                ),
+                keyboardType: keyboardType,
+                textInputAction: textInputAction,
+                style: style,
+                strutStyle: strutStyle,
+                textAlign: textAlign,
+                textDirection: textDirection,
+                textCapitalization: textCapitalization,
+                autofocus: autofocus,
+                obscureText: obscureText,
+                autocorrect: autocorrect,
+                maxLengthEnforced: maxLengthEnforced,
+                maxLines: maxLines,
+                minLines: minLines,
+                expands: expands,
+                maxLength: maxLength,
+                onChanged: (string) =>
+                    field.didChange(tryParse(string, options)),
+                onEditingComplete: onEditingComplete,
+                onSubmitted: (string) => onFieldSubmitted == null ? null : onFieldSubmitted(tryParse(string, options)),
+                inputFormatters: inputFormatters,
+                enabled: enabled,
+                cursorWidth: cursorWidth,
+                cursorRadius: cursorRadius,
+                cursorColor: cursorColor,
+                scrollPadding: scrollPadding,
+                keyboardAppearance: keyboardAppearance,
+                enableInteractiveSelection: enableInteractiveSelection,
+                buildCounter: buildCounter,
+              );
+            });
 
   final Function(BuildContext context, String currentValue) onShowPicker;
   final List<String> options;

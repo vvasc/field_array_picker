@@ -12,7 +12,9 @@ class PickerArrayWidget extends StatelessWidget {
     @required this.options,
     @required this.title,
     @required this.inputDecoration,
+    this.onSaved,
     this.onFieldSubmitted,
+    this.validator,
   }) : super(key: key);
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -20,6 +22,8 @@ class PickerArrayWidget extends StatelessWidget {
   final Text title;
   final InputDecoration inputDecoration;
   final Function() onFieldSubmitted;
+  final Function(String param) onSaved;
+  final Function(String param) validator;
   @override
   Widget build(BuildContext context) {
     return PickerArrayField(
@@ -27,6 +31,8 @@ class PickerArrayWidget extends StatelessWidget {
       controller: controller,
       options: options,
       focusNode: focusNode,
+      onSaved: onSaved,
+      validator: validator,
       onFieldSubmitted: (value) {
         onFieldSubmitted();
       },
