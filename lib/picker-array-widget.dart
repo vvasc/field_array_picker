@@ -16,6 +16,8 @@ class PickerArrayWidget extends StatelessWidget {
     this.onFieldSubmitted,
     this.validator,
     this.style,
+    this.confirmText,
+    this.cancelText,
   }) : super(key: key);
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -26,6 +28,8 @@ class PickerArrayWidget extends StatelessWidget {
   final Function(String param) onSaved;
   final Function(String param) validator;
   final TextStyle style;
+  final String confirmText;
+  final String cancelText;
   @override
   Widget build(BuildContext context) {
     return PickerArrayField(
@@ -41,6 +45,8 @@ class PickerArrayWidget extends StatelessWidget {
       },
       onShowPicker: (context, currentValue) {
         Picker(
+          confirmText: confirmText,
+          cancelText: cancelText,
           adapter: PickerDataAdapter<String>(
             pickerdata: new JsonDecoder().convert('[' + options.toString() + ']'),
             isArray: true,
